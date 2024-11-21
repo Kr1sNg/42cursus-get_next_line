@@ -13,6 +13,10 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+#ifndef	BUFFER_SIZE
+# define BUFFER_SIZE 15
+#endif
+
 /*
 ** :::::::::::::::::::::::::::::::::* HEADERS *:::::::::::::::::::::::::::::: **
 */
@@ -21,16 +25,18 @@
 # include <stdlib.h>
 
 /*
-** :::::::::::::::::::::::::::* STRUCT DECLARATION *::::::::::::::::::::::::: **
-*/
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-
-/*
 ** ::::::::::::::::::::::::::* FUNCTION PROTOTYPES *::::::::::::::::::::::::: **
 */
 
+/*
+**	get_next_line.c
+*/
+
+char	*get_next_line(int fd);
+
+
+/*
+**	get_next_line_utils.c
+*/
+
+#endif
