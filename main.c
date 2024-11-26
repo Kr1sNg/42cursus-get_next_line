@@ -16,22 +16,30 @@
 
 int	main(void)
 {
-	int		fd;
-	char	*next_line;
-	int		count;
-
-	count = 0;
-	fd = open("test1.txt", O_RDONLY);
-	while (1)
+	char	*line;
+	int		i;
+	int		fd1;
+//	int		fd2;
+//	int		fd3;
+	fd1 = open("test1.txt", O_RDONLY);
+//	fd2 = open("tests/test2.txt", O_RDONLY);
+//	fd3 = open("tests/test3.txt", O_RDONLY);
+	i = 1;
+	while (i < 7)
 	{
-		next_line = get_next_line(fd);
-		if (next_line == NULL)
-			break;
-		count++;
-		printf("[%i]:%s\n", count, next_line);
-		next_line = NULL;
+		line = get_next_line(fd1);
+		printf("line [%02d]: %s", i, line);
+		free(line);
+//		line = get_next_line(fd2);
+//		printf("line [%02d]: %s", i, line);
+//		free(line);
+//		line = get_next_line(fd3);
+//		printf("line [%02d]: %s", i, line);
+//		free(line);
+		i++;
 	}
-
-	close(fd);
+	close(fd1);
+//	close(fd2);
+//	close(fd3);
 	return (0);
 }

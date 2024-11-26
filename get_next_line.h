@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 #ifndef	BUFFER_SIZE
-# define BUFFER_SIZE 15
+# define BUFFER_SIZE 42
 #endif
 
 /*
@@ -34,9 +34,17 @@
 
 char	*get_next_line(int fd);
 char	*ft_read_file(int fd, char *rest);
+char	*ft_line(char *buffer);
+char	*ft_remain(char *buffer);
+char	*ft_nextline(char *remain, char *buffer);
 
 /*
 **	get_next_line_utils.c
 */
+
+unsigned int	ft_strlen(char *str);
+void			*ft_calloc(unsigned int nmemb, unsigned int	size);
+char			*ft_strchr(char *s, char c);
+char			*ft_strjoin(char *s1, char *s2);
 
 #endif

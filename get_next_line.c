@@ -21,21 +21,21 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	buffer = ft_read_file(fd, buffer); //TODO
+	buffer = ft_read_file(fd, buffer);
 	if (buffer == NULL)
 		return (NULL);
-	line = ft_line(buffer); //TODO
-	buffer = ft_next(buffer); //TODO
+	line = ft_line(buffer);
+	buffer = ft_remain(buffer);
 	return (line);
 }
 
-char	*ft_read_file(int fd, char *rest)
+char	*ft_read_file(int fd, char *remain)
 {
 	char	*buffer;
 	int		byte_read;
 	
-	if (rest == NULL)
-		rest = ft_calloc(1, 1);
+	if (remain == NULL)
+		remain = ft_calloc(1, 1);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	byte_read = 1;
 	while (byte_read > 0)
@@ -47,12 +47,64 @@ char	*ft_read_file(int fd, char *rest)
 			return (NULL);
 		}
 		buffer[byte_read] = 0;
-		rest = ft_free(rest, buffer); //TODO
-		if (ft_strchr(buffer, '\n'))
+		remain = ft_nextline(remain, buffer);
+		if (ft_strchr(buffer, '\n') != NULL)
 			break;
 	}
 	free(buffer);
-	return (rest);
+	return (remain);
 }
 
+char	*ft_line(char *buffer)
+{
+	char	*line;
+	int		i;
 
+	i = 0;
+	if (buffer[i] == '\0')
+		return (NULL);
+	while (buffer[i] != '\0' && buffer[i] != '\n')
+		i++;
+	line = ft_calloc(i + 2, sizeof(char)); //TODO (line[0] and NULL character)
+	i = 0;
+	while (buffer[i] != '\0' && buffer[i] != '\n')
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	if (buffer[i] != '\0' && buffer[i] == '\n')
+		line[i++] = '\n';
+	return (line);
+}
+
+char	*ft_remain(char *buffer)
+{
+	int		i;
+	int		j;
+	char	*remain;
+
+	i = 0;
+	j = 0;
+	while (buffer[i] != '\0' && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\0')
+	{
+		free(buffer);
+		return (NULL);
+	}
+	remain = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	i++;
+	while (buffer[i] != '\0')
+		remain[j++] = buffer[i++];
+	free(buffer);
+	return (remain);
+}
+
+char	*ft_nextline(char *remain, char *buffer)
+{
+	char	*temp;
+
+	temp = ft_strjoin(remain, buffer);
+	free(remain);
+	return (temp);
+}
