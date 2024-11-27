@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:56:17 by tat-nguy          #+#    #+#             */
-/*   Updated: 2024/11/22 17:32:33 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:48:34 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_read_file(int fd, char *remain)
 			return (NULL);
 		}
 		buffer[byte_read] = 0;
-		remain = ft_nextline(remain, buffer);
+		remain = ft_lineappend(remain, buffer);
 		if (ft_strchr(buffer, '\n') != NULL)
 			break;
 	}
@@ -60,12 +60,14 @@ char	*ft_line(char *buffer)
 	char	*line;
 	int		i;
 
-	i = 0;
-	if (buffer[i] == '\0')
+	if (buffer == NULL || buffer[0] == '\0')
 		return (NULL);
+	i = 0;
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
 	line = ft_calloc(i + 2, sizeof(char)); //TODO (line[0] and NULL character)
+	if (line == NULL)
+		return (NULL);
 	i = 0;
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 	{
@@ -84,7 +86,6 @@ char	*ft_remain(char *buffer)
 	char	*remain;
 
 	i = 0;
-	j = 0;
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\0')
@@ -93,14 +94,18 @@ char	*ft_remain(char *buffer)
 		return (NULL);
 	}
 	remain = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
-	i++;
+	if (remain == NULL)
+		return (NULL);
+	i += (buffer[i] == '\n');
+	j = 0;
 	while (buffer[i] != '\0')
 		remain[j++] = buffer[i++];
+	remain[j] = '\0';
 	free(buffer);
 	return (remain);
 }
 
-char	*ft_nextline(char *remain, char *buffer)
+char	*ft_lineappend(char *remain, char *buffer)
 {
 	char	*temp;
 

@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:56:34 by tat-nguy          #+#    #+#             */
-/*   Updated: 2024/11/22 17:32:21 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:32:47 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_next_line(int fd);
 char	*ft_read_file(int fd, char *rest);
 char	*ft_line(char *buffer);
 char	*ft_remain(char *buffer);
-char	*ft_nextline(char *remain, char *buffer);
+char	*ft_lineappend(char *remain, char *buffer);
 
 /*
 **	get_next_line_utils.c

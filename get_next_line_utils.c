@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tat-nguy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:57:04 by tat-nguy          #+#    #+#             */
-/*   Updated: 2024/11/08 19:57:06 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:49:10 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	i = 0;
 	while (s1[i] != '\0')
-		new[i++] = s1[i++];
+	{
+		new[i] = s1[i];
+		i++;
+	}
 	j = 0;
 	while (s2[j] != '\0')
 		new[i++] = s2[j++];
