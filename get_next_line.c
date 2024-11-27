@@ -6,7 +6,7 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:56:17 by tat-nguy          #+#    #+#             */
-/*   Updated: 2024/11/27 11:48:34 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:03:12 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_read_file(int fd, char *remain)
 {
 	char	*buffer;
 	int		byte_read;
-	
+
 	if (remain == NULL)
 		remain = ft_calloc(1, 1);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
@@ -46,10 +46,10 @@ char	*ft_read_file(int fd, char *remain)
 			free(buffer);
 			return (NULL);
 		}
-		buffer[byte_read] = 0;
+		buffer[byte_read] = '\0';
 		remain = ft_lineappend(remain, buffer);
 		if (ft_strchr(buffer, '\n') != NULL)
-			break;
+			break ;
 	}
 	free(buffer);
 	return (remain);
@@ -65,7 +65,7 @@ char	*ft_line(char *buffer)
 	i = 0;
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char)); //TODO (line[0] and NULL character)
+	line = ft_calloc(i + 2, sizeof(char));
 	if (line == NULL)
 		return (NULL);
 	i = 0;

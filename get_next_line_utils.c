@@ -6,13 +6,13 @@
 /*   By: tat-nguy <tat-nguy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 19:57:04 by tat-nguy          #+#    #+#             */
-/*   Updated: 2024/11/27 11:49:10 by tat-nguy         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:09:07 by tat-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-unsigned int	ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
 	unsigned int	i;
 
@@ -22,7 +22,7 @@ unsigned int	ft_strlen(char *str)
 	return (i);
 }
 
-void	*ft_calloc(unsigned int nmemb, unsigned int	size)
+void	*ft_calloc(unsigned int nmemb, unsigned int size)
 {
 	char			*s;
 	unsigned int	i;
