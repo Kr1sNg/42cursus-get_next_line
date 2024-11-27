@@ -22,11 +22,11 @@ int	main(void)
 	int		fd2;
 	int		fd3;
 
-	fd1 = open("test1.txt", O_RDONLY);
-	fd2 = open("test2.txt", O_RDONLY);
-	fd3 = open("test3.txt", O_RDONLY);
+	fd1 = open("alone.txt", O_RDONLY);
+	fd2 = open("empty.txt", O_RDONLY);
+	fd3 = open("longtext.txt", O_RDONLY);
 	i = 1;
-	while (i < 7)
+	while (i < 6)
 	{
 		line = get_next_line(fd1);
 		printf("line [%02d]: %s", i, line);

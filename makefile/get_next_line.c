@@ -12,8 +12,6 @@
 
 #include "get_next_line.h"
 
-//update the buffer and return line
-
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
