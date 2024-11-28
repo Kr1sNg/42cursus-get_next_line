@@ -17,7 +17,7 @@ char	*get_next_line(int fd)
 	static char	*buffer[4096];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || fd >= 4096 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	buffer[fd] = ft_read_file(fd, buffer[fd]);
 	if (buffer[fd] == NULL)
@@ -35,6 +35,8 @@ char	*ft_read_file(int fd, char *remain)
 	if (remain == NULL)
 		remain = ft_calloc(1, 1);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!buffer)
+		return (NULL);
 	byte_read = 1;
 	while (byte_read > 0)
 	{
@@ -46,6 +48,11 @@ char	*ft_read_file(int fd, char *remain)
 		}
 		buffer[byte_read] = '\0';
 		remain = ft_lineappend(remain, buffer);
+		if (!remain)
+		{
+			free(buffer);
+			return (NULL);
+		}
 		if (ft_strchr(buffer, '\n') != NULL)
 			break ;
 	}
@@ -110,4 +117,42 @@ char	*ft_lineappend(char *remain, char *buffer)
 	temp = ft_strjoin(remain, buffer);
 	free(remain);
 	return (temp);
+}
+
+#include <fcntl.h>
+#include <stdio.h>
+
+int   main(void)
+{
+    char    *line1;
+	//char	*line2;
+	//char	*line3;
+    int     i;
+    int     fd1;
+	//int		fd2;
+	//int		fd3;
+
+
+    fd1 = open("text.txt", O_RDONLY);
+	//fd2 = open("number.txt", O_RDONLY);
+	//fd3 = open("long.txt", O_RDONLY);
+
+    i = 1;
+    while (i < 10)
+	{
+		line1 = get_next_line(fd1);
+        printf("text1 [%02i]: %s", i, line1);
+        free(line1);
+	// 	line2 = get_next_line(fd2);
+	// 	printf("text2 [%02i]: %s", i, line2);
+    //    free(line2);
+	// 	line3 = get_next_line(fd3);
+	// 	printf("text3 [%02i]: %s", i, line3);
+    //    free(line3);
+        i++;
+	}
+    close(fd1);
+	//close(fd2);
+	// close(fd3);
+    return (0);
 }

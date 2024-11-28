@@ -12,8 +12,6 @@
 
 #include "get_next_line.h"
 
-//update the buffer and return line
-
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
@@ -113,3 +111,28 @@ char	*ft_lineappend(char *remain, char *buffer)
 	free(remain);
 	return (temp);
 }
+
+/*
+#include <fcntl.h>
+#include <stdio.h>
+
+int   main(void)
+{
+    char    *line;
+    int     i;
+    int     fd1;
+
+
+    fd1 = open("long.txt", O_RDONLY);
+
+    i = 1;
+    while ((line = get_next_line(fd1)) != NULL)
+    {
+        printf("line [%02i]: %s", i, line);
+        free(line);
+        i++;
+    }
+    close(fd1);
+    return (0);
+}
+*/
