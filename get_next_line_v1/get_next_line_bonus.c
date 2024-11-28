@@ -38,23 +38,17 @@ char	*ft_read_file(int fd, char *remain)
 	if (!buffer)
 		return (NULL);
 	byte_read = 1;
-	while (byte_read > 0)
+	while (!(ft_strchr(buffer, '\n')) && byte_read != 0)
 	{
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read < 0)
 		{
 			free(buffer);
+			free(remain);
 			return (NULL);
 		}
 		buffer[byte_read] = '\0';
 		remain = ft_lineappend(remain, buffer);
-		if (!remain)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		if (ft_strchr(buffer, '\n') != NULL)
-			break ;
 	}
 	free(buffer);
 	return (remain);
@@ -119,40 +113,42 @@ char	*ft_lineappend(char *remain, char *buffer)
 	return (temp);
 }
 
+/*
 #include <fcntl.h>
 #include <stdio.h>
 
 int   main(void)
 {
     char    *line1;
-	//char	*line2;
-	//char	*line3;
+	char	*line2;
+	char	*line3;
     int     i;
     int     fd1;
-	//int		fd2;
-	//int		fd3;
+	int		fd2;
+	int		fd3;
 
 
-    fd1 = open("text.txt", O_RDONLY);
-	//fd2 = open("number.txt", O_RDONLY);
-	//fd3 = open("long.txt", O_RDONLY);
+    fd1 = open("null.txt", O_RDONLY);
+	fd2 = open("number.txt", O_RDONLY);
+	fd3 = open("long.txt", O_RDONLY);
 
     i = 1;
-    while (i < 10)
+    while (i < 26)
 	{
 		line1 = get_next_line(fd1);
         printf("text1 [%02i]: %s", i, line1);
         free(line1);
-	// 	line2 = get_next_line(fd2);
-	// 	printf("text2 [%02i]: %s", i, line2);
-    //    free(line2);
-	// 	line3 = get_next_line(fd3);
-	// 	printf("text3 [%02i]: %s", i, line3);
-    //    free(line3);
+		line2 = get_next_line(fd2);
+		printf("text2 [%02i]: %s", i, line2);
+       	free(line2);
+		line3 = get_next_line(fd3);
+		printf("text3 [%02i]: %s", i, line3);
+       	free(line3);
         i++;
 	}
     close(fd1);
-	//close(fd2);
-	// close(fd3);
+	close(fd2);
+	close(fd3);
     return (0);
 }
+*/
